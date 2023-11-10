@@ -1,0 +1,14 @@
+li a{
+    padding: 0;
+    color:white;
+    text-decoration: none;
+}
+li a:hover{
+    color:#ffe600;
+}
+li a.active{
+    color:#ffe600;
+}
+li a.active a{
+    color:#ffe600;
+}
