@@ -11,8 +11,8 @@ const Navbar = () => {
         <li><NavLink to='/sing'>Sign in</NavLink></li>
     </>
     return (
-        <div className=" bg-[#0000008e]  sticky top-0">
-            <div className="navbar flex justify-between max-w-screen-xl mx-auto ">
+        <div className=" bg-[#0000008e] fixed z-10 w-full">
+            <div className="navbar flex justify-between max-w-screen-xl mx-auto py-4">
                 <div>
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
