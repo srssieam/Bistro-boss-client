@@ -2,11 +2,9 @@
 
 const SectionTitle = ({heading, subHeading}) => {
     return (
-        <div className="space-y-4">
-            <p className="text-yellow-700">---{subHeading}---</p>
-            <hr />
-            <h3 className="text-4xl">{heading}</h3>
-            <hr />
+        <div className="my-6 text-center">
+            <p className="text-yellow-500 border-b-2 max-w-max mx-auto text-lg">---{subHeading}---</p>
+            <h3 className="text-4xl border-b-2 max-w-max py-5 mx-auto uppercase">{heading}</h3>
         </div>
     );
 };
