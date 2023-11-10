@@ -1,5 +1,6 @@
 import Banner from "../SharedComponentes/Banner";
 import Category from "../SharedComponentes/Category";
+import PopularMenu from "../SharedComponentes/PopularMenu";
 
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Category></Category>
+            <PopularMenu></PopularMenu>
         </div>
     );
 };
