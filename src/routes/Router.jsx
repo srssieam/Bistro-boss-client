@@ -18,10 +18,14 @@ const Router =createBrowserRouter([
                 path: 'menu',
                 element:<Menu></Menu>
             },
+            // {
+            //     path: 'shop',
+            //     element:<OurShop></OurShop>
+            // },
             {
-                path: 'shop',
+                path: 'shop/:category',
                 element:<OurShop></OurShop>
-            }
+            },
         ]
     }
 ])

@@ -6,10 +6,16 @@ import 'react-tabs/style/react-tabs.css';
 import { useState } from "react";
 import useMenu from "../../hooks/useMenu";
 import ShopCategoryItems from "./ShopCategoryItems";
+import { useParams } from "react-router-dom";
 
 const OurShop = () => {
-    const [tabIdx, setTabIdx] = useState(0);
+    const {category}= useParams();
+    const categories = ["SALADS","PIZZA","DESSERTS","SOUPS","DRINKS"];
+    const initialIdx = categories.indexOf(category)
+    const [tabIdx, setTabIdx] = useState(initialIdx);
     const [menu] = useMenu();
+    
+    console.log(category)
     const dessert = menu.filter(item => item.category === 'dessert')
     const pizza = menu.filter(item => item.category === 'pizza')
     const salad = menu.filter(item => item.category === 'salad')
