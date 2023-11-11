@@ -26,9 +26,7 @@ const Menu = () => {
 
             {/* offered menu */}
             <MenuCategoryItems categoryName={offer}></MenuCategoryItems>
-            <div className="flex justify-center my-8">
-                <button className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 border-b-gray-700  shadow-xl">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
+            
 
             {/* dessert menu */}
             <MenuCategoryItems 
@@ -40,9 +38,6 @@ const Menu = () => {
             specimen book."
             >
             </MenuCategoryItems>
-            <div className="flex justify-center my-8">
-                <button className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 border-b-gray-700  shadow-xl">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
 
 
             {/* pizza menu */}
@@ -55,9 +50,6 @@ const Menu = () => {
             specimen book."
             >
             </MenuCategoryItems>
-            <div className="flex justify-center my-8">
-                <button className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 border-b-gray-700  shadow-xl">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
 
 
             {/* salad menu */}
@@ -70,9 +62,6 @@ const Menu = () => {
             specimen book."
             >
             </MenuCategoryItems>
-            <div className="flex justify-center my-8">
-                <button className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 border-b-gray-700  shadow-xl">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
 
 
             {/* soup menu */}
@@ -85,9 +74,6 @@ const Menu = () => {
             specimen book."
             >
             </MenuCategoryItems>
-            <div className="flex justify-center my-8">
-                <button className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 border-b-gray-700  shadow-xl">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
         </div>
     );
 };
