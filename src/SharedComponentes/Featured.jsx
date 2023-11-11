@@ -4,7 +4,7 @@ import featuredImg from "../assets/home/featured.jpg"
 
 const Featured = () => {
     return (
-        <div style={{backgroundImage:`url(${featuredImg})`, backgroundAttachment:'fixed'}} className="py-32 text-white bg-[#00000080] bg-blend-darken">
+        <div style={{backgroundImage:`url(${featuredImg})`, backgroundAttachment:'fixed'}} className="bg-no-repeat bg-cover w-full py-32 text-white bg-[#00000080] bg-blend-darken">
             <SectionTitle subHeading={"Check it out"} heading={"FROM OUR MENU"}></SectionTitle>
             <div className="md:flex md:justify-center items-center gap-9 max-w-screen-xl mx-auto px-6 lg:px-0">
                 <div>
