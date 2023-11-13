@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { useForm  } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 
 const CreateAccount = () => {
@@ -18,6 +19,11 @@ const CreateAccount = () => {
             .then(res =>{
                 const loggedUser = res.user;
                 console.log(loggedUser)
+                Swal.fire({
+                    title: "Account created successful!",
+                    text: "Thank you for being with us!",
+                    icon: "success"
+                  });
             })
     }
 
@@ -58,8 +64,6 @@ const CreateAccount = () => {
                             {errors.password?.type === "minLength" && <span className="text-red-700">password must be more then 6 character!</span>}
                             {errors.password?.type === "pattern" && <span className="text-red-700">password must have one uppercase, one lowercase, one number and one spacial characters!</span>}
                         </div>
-                        
-                        <p className='text-red-700 font-semibold'>{error}</p>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn bg-[#d4813d] hover:bg-[#b67947] border-none text-white">Sign up</button>
                         </div>

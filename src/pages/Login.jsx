@@ -6,6 +6,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [error, setError]=useState('')
@@ -28,8 +29,13 @@ const Login = () => {
                 .then(res =>{
                     const user = res.user;
                     console.log(user);
+                    Swal.fire({
+                        title: "Login successful!",
+                        text: "Thank you for being with us!",
+                        icon: "success"
+                      });
                 })
-                .then(err =>{
+                .catch(err =>{
                     console.log(err)
                     setError("invalid password")
                 })

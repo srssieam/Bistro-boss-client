@@ -1,15 +1,34 @@
 import { Link, NavLink } from "react-router-dom";
 import './NavbarStyle.css'
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const handleSignOut = ()=>{
+        logOut()
+            .then(()=>{
+                Swal.fire({
+                    title: "Sign out successful!",
+                    text: "Thank you for being with us!",
+                    icon: "success"
+                  });
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+    }
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/contact'>Contact us</NavLink></li>
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         <li><NavLink to='/menu'>Our menu</NavLink></li>
         <li><NavLink to='/shop/SALADS'>Our shop</NavLink></li>
-        <li><NavLink to='/login'>Sign in</NavLink></li>
+        {
+            user ? <li><NavLink onClick={handleSignOut}>Sign out</NavLink></li> : <li><NavLink to="/login">Sign in</NavLink></li>
+        }
     </>
     return (
         <div className=" bg-[#0000008e] fixed z-10 w-full">
