@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import loginBg from '../assets/others/authenticationBg.png'
 import loginImg from '../assets/others/authentication1.png'
 import { AuthContext } from "../provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { useForm  } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
@@ -10,12 +10,16 @@ import Swal from "sweetalert2";
 
 
 const CreateAccount = () => {
-    const { createUser } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser, googleLogin, updateUserProfile } = useContext(AuthContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || "/"
 
     const onSubmit = data =>{
         console.log(data);
-        createUser(data.email, data.password)
+        createUser(data.email, data.password, data.photo)
             .then(res =>{
                 const loggedUser = res.user;
                 console.log(loggedUser)
@@ -24,10 +28,30 @@ const CreateAccount = () => {
                     text: "Thank you for being with us!",
                     icon: "success"
                   });
+                updateUserProfile(data.name, data.photo)
+                reset();
+                navigate('/')
             })
     }
 
+    const handleGoogleLogin = ()=>{
+        googleLogin()
+        .then(res =>{
+            const user = res.user;
+            console.log(user);
+            Swal.fire({
+                title: "Login successful!",
+                text: "Thank you for being with us!",
+                icon: "success"
+              });
+              navigate(from, {replace:true});
 
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+
+    }   
 
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
@@ -47,6 +71,13 @@ const CreateAccount = () => {
                             </label>
                             <input {...register("name", { required: true })} type="text" name="name" placeholder="name" className="input input-bordered" />
                             {errors.name && <span className="text-red-700">Name is required !</span>}
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text text-xl font-semibold text-black">Photo</span>
+                            </label>
+                            <input {...register("photo", { required: true })} type="text" name="photo" placeholder="Photo url" className="input input-bordered" />
+                            {errors.photo && <span className="text-red-700">Photo is required !</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -72,7 +103,7 @@ const CreateAccount = () => {
                         <p className='text-xl text-center text-[#b67947]'>Already registered? <Link className=' font-bold' to='/login'>Go to login</Link></p>
                         <p className='text-center text-black'>Or Sign In with</p>
                         <div className='flex justify-center'>
-                            <button className='border-2 border-gray-800 p-3 rounded-full'><FcGoogle className='text-xl'></FcGoogle></button>
+                            <button onClick={handleGoogleLogin} className='border-2 border-gray-800 p-3 rounded-full'><FcGoogle className='text-xl'></FcGoogle></button>
                         </div>
                     </div>
                 </div>
