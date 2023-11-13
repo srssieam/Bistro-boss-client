@@ -9,12 +9,16 @@ import { Helmet } from "react-helmet-async";
 
 
 const CreateAccount = () => {
-    const [error, setError] = useState('')
     const { createUser } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data =>{
-        console.log(data)
+        console.log(data);
+        createUser(data.email, data.password)
+            .then(res =>{
+                const loggedUser = res.user;
+                console.log(loggedUser)
+            })
     }
 
 
