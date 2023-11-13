@@ -9,7 +9,7 @@ const Navbar = () => {
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         <li><NavLink to='/menu'>Our menu</NavLink></li>
         <li><NavLink to='/shop/SALADS'>Our shop</NavLink></li>
-        <li><NavLink to='/sing'>Sign in</NavLink></li>
+        <li><NavLink to='/login'>Sign in</NavLink></li>
     </>
     return (
         <div className=" bg-[#0000008e] fixed z-10 w-full">

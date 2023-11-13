@@ -4,6 +4,8 @@ import Root from '../layouts/Root';
 import Home from '../pages/Home';
 import Menu from '../pages/our menu/Menu';
 import OurShop from '../pages/our shop/OurShop';
+import Contact from '../pages/Contact';
+import Login from '../pages/Login';
 
 const Router =createBrowserRouter([
     {
@@ -18,14 +20,18 @@ const Router =createBrowserRouter([
                 path: 'menu',
                 element:<Menu></Menu>
             },
-            // {
-            //     path: 'shop',
-            //     element:<OurShop></OurShop>
-            // },
+            {
+                path: 'contact',
+                element:<Contact></Contact>
+            },
             {
                 path: 'shop/:category',
                 element:<OurShop></OurShop>
             },
+            {
+                path: 'login',
+                element:<Login></Login>
+            }
         ]
     }
 ])
