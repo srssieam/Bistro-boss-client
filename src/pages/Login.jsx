@@ -2,14 +2,30 @@ import loginBg from '../assets/others/authenticationBg.png'
 import loginImg from '../assets/others/authentication1.png'
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { useEffect } from 'react';
 
 const Login = () => {
+
+    useEffect( () =>{
+        loadCaptchaEnginge(6)
+    }, [])
+
     const handleLogin = e => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        const captcha = form.captcha.value;
+        console.log(email, password, captcha)
+
+        if (validateCaptcha(captcha)==true) {
+            alert('Captcha Matched');
+        }
+   
+        else {
+            alert('Captcha Does Not Match');
+        }
     }
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
@@ -32,14 +48,11 @@ const Login = () => {
                             </label>
                             <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                         </div>
-                        <div className="form-control mt-7">
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
-                        </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text text-xl font-semibold text-[#523a92]">Reload Captcha</span>
+                                <LoadCanvasTemplate />
                             </label>
-                            <input type="password" name="password" placeholder="type here" className="input input-bordered" required />
+                            <input type="text" name="captcha" placeholder="type here" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn bg-[#d4813d] hover:bg-[#b67947] border-none text-white">Login</button>
