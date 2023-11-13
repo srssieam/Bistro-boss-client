@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const [error, setError]=useState('')
@@ -41,6 +42,9 @@ const Login = () => {
     }
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
+            <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
             <div className='max-w-screen-xl shadow-2xl h-full lg:h-[80vh] grid md:grid-cols-2 w-full'>
                 <div className='w-full flex items-center justify-center'>
                     <img src={loginImg} alt="" />

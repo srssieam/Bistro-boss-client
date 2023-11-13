@@ -5,6 +5,7 @@ import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { useForm  } from "react-hook-form"
+import { Helmet } from "react-helmet-async";
 
 
 const CreateAccount = () => {
@@ -20,6 +21,9 @@ const CreateAccount = () => {
 
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
+            <Helmet>
+                <title>Bistro Boss | Sign up</title>
+            </Helmet>
             <div className='max-w-screen-xl shadow-2xl h-full lg:h-[80vh] grid md:grid-cols-2 w-full'>
                 <div className='w-full flex items-center justify-center'>
                     <img src={loginImg} alt="" />
@@ -45,9 +49,10 @@ const CreateAccount = () => {
                             <label className="label">
                                 <span className="label-text text-xl font-semibold text-black">Password</span>
                             </label>
-                            <input {...register("password", { required: true, minLength: 6 })} type="password" name="password" placeholder="password" className="input input-bordered" />
+                            <input {...register("password", { required: true, minLength: 6, pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}:;<>,.?~\\/-]).{6,}$/ })} type="password" name="password" placeholder="password" className="input input-bordered" />
                             {errors.password?.type === "required" && <span className="text-red-700">password is required !</span>}
                             {errors.password?.type === "minLength" && <span className="text-red-700">password must be more then 6 character!</span>}
+                            {errors.password?.type === "pattern" && <span className="text-red-700">password must have one uppercase, one lowercase, one number and one spacial characters!</span>}
                         </div>
                         
                         <p className='text-red-700 font-semibold'>{error}</p>
