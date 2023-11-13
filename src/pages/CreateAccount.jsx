@@ -4,11 +4,19 @@ import loginImg from '../assets/others/authentication1.png'
 import { AuthContext } from "../provider/AuthProvider";
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
+import { useForm  } from "react-hook-form"
 
 
 const CreateAccount = () => {
     const [error, setError] = useState('')
     const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const onSubmit = data =>{
+        console.log(data)
+    }
+
+
 
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
@@ -17,25 +25,29 @@ const CreateAccount = () => {
                     <img src={loginImg} alt="" />
                 </div>
                 <div>
-                    <form className="lg:px-20">
+                    <form onSubmit={handleSubmit(onSubmit)} className="lg:px-20">
                         <h1 className="text-4xl font-bold text-center">Sign Up</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-xl font-semibold text-black">Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="name" className="input input-bordered" required />
+                            <input {...register("name", { required: true })} type="text" name="name" placeholder="name" className="input input-bordered" />
+                            {errors.name && <span className="text-red-700">Name is required !</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-xl font-semibold text-black">Email</span>
                             </label>
-                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                            <input {...register("email", { required: true })} type="email" name="email" placeholder="email" className="input input-bordered" />
+                            {errors.email && <span className="text-red-700">Email is required !</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-xl font-semibold text-black">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                            <input {...register("password", { required: true, minLength: 6 })} type="password" name="password" placeholder="password" className="input input-bordered" />
+                            {errors.password?.type === "required" && <span className="text-red-700">password is required !</span>}
+                            {errors.password?.type === "minLength" && <span className="text-red-700">password must be more then 6 character!</span>}
                         </div>
                         
                         <p className='text-red-700 font-semibold'>{error}</p>

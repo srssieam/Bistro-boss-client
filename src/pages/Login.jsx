@@ -28,6 +28,10 @@ const Login = () => {
                     const user = res.user;
                     console.log(user);
                 })
+                .then(err =>{
+                    console.log(err)
+                    setError("invalid password")
+                })
         }
    
         else {
