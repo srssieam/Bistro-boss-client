@@ -1,6 +1,6 @@
 import loginBg from '../assets/others/authenticationBg.png'
 import loginImg from '../assets/others/authentication1.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
@@ -10,7 +10,11 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
     const [error, setError]=useState('')
-    const {login} = useContext(AuthContext);
+    const {login, googleLogin} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || "/"
 
     useEffect( () =>{
         loadCaptchaEnginge(6)
@@ -34,6 +38,8 @@ const Login = () => {
                         text: "Thank you for being with us!",
                         icon: "success"
                       });
+                      navigate(from, {replace:true});
+
                 })
                 .catch(err =>{
                     console.log(err)
@@ -46,6 +52,27 @@ const Login = () => {
             return;
         }
     }
+
+    const handleGoogleLogin = ()=>{
+        googleLogin()
+        .then(res =>{
+            const user = res.user;
+            console.log(user);
+            Swal.fire({
+                title: "Login successful!",
+                text: "Thank you for being with us!",
+                icon: "success"
+              });
+              navigate(from, {replace:true});
+
+        })
+        .catch(err =>{
+            console.log(err)
+            setError("invalid password")
+        })
+
+    }   
+
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
             <Helmet>
@@ -85,7 +112,7 @@ const Login = () => {
                     <p className='text-xl text-center text-[#b67947]'>New Here? <Link className=' font-bold' to='/signup'>Create a new account</Link></p>
                     <p className='text-center text-black'>Or Sign In with</p>
                     <div className='flex justify-center'>
-                        <button className='border-2 border-gray-800 p-3 rounded-full'><FcGoogle className='text-xl'></FcGoogle></button>
+                        <button onClick={handleGoogleLogin} className='border-2 border-gray-800 p-3 rounded-full'><FcGoogle className='text-xl'></FcGoogle></button>
                     </div>
                     </div>
                 </div>
