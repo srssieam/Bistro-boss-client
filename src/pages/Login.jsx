@@ -3,9 +3,10 @@ import loginImg from '../assets/others/authentication1.png'
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Login = () => {
+    const [error, setError]=useState('')
 
     useEffect( () =>{
         loadCaptchaEnginge(6)
@@ -24,7 +25,8 @@ const Login = () => {
         }
    
         else {
-            alert('Captcha Does Not Match');
+            setError("invalid captcha")
+            return;
         }
     }
     return (
@@ -53,9 +55,10 @@ const Login = () => {
                                 <LoadCanvasTemplate />
                             </label>
                             <input type="text" name="captcha" placeholder="type here" className="input input-bordered" required />
+                            <p className='text-red-700 font-semibold'>{error}</p>
                         </div>
                         <div className="form-control mt-6">
-                            <button type='submit' className="btn bg-[#d4813d] hover:bg-[#b67947] border-none text-white">Login</button>
+                            <button type='submit'className="btn bg-[#d4813d] hover:bg-[#b67947] border-none text-white">Login</button>
                         </div>
                     </form>
                     <div className='space-y-4 mt-4'>
