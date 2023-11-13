@@ -3,10 +3,12 @@ import loginImg from '../assets/others/authentication1.png'
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Login = () => {
     const [error, setError]=useState('')
+    const {login} = useContext(AuthContext);
 
     useEffect( () =>{
         loadCaptchaEnginge(6)
@@ -21,7 +23,11 @@ const Login = () => {
         console.log(email, password, captcha)
 
         if (validateCaptcha(captcha)==true) {
-            alert('Captcha Matched');
+            login(email,password)
+                .then(res =>{
+                    const user = res.user;
+                    console.log(user);
+                })
         }
    
         else {
@@ -62,7 +68,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className='space-y-4 mt-4'>
-                    <p className='text-xl text-center text-[#b67947]'>New Here? <Link className=' font-bold' to='/signUp'>Create a new account</Link></p>
+                    <p className='text-xl text-center text-[#b67947]'>New Here? <Link className=' font-bold' to='/signup'>Create a new account</Link></p>
                     <p className='text-center text-black'>Or Sign In with</p>
                     <div className='flex justify-center'>
                         <button className='border-2 border-gray-800 p-3 rounded-full'><FcGoogle className='text-xl'></FcGoogle></button>
