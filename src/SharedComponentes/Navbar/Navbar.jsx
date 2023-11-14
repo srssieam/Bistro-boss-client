@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import profile from "../../assets/others/profile.png"
+import { BsCart4 } from 'react-icons/bs';
 
 
 const Navbar = () => {
@@ -27,6 +28,12 @@ const Navbar = () => {
         <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
         <li><NavLink to='/menu'>Our menu</NavLink></li>
         <li><NavLink to='/shop/SALADS'>Our shop</NavLink></li>
+        <li>
+            <NavLink to='/cart' className="relative">
+                <BsCart4 className="text-4xl bg-green-900 h-10 w-10 p-2 rounded-full"></BsCart4>
+                <p className="absolute -right-2 -bottom-3 text-sm rounded-full p-1 bg-red-600 text-white">+12</p>
+            </NavLink>
+        </li>
         {
             user ? <li><NavLink onClick={handleSignOut}>Sign out</NavLink></li> : <li><NavLink to="/login">Sign in</NavLink></li>
         }
