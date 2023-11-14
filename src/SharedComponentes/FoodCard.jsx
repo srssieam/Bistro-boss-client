@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCart from "../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
@@ -10,11 +11,11 @@ const FoodCard = ({ item }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const axiosSecure = useAxiosSecure();
+    const [ , refetch] = useCart(); // destructure only refetch from useCart()
 
-    const handleAddToCart = (food)=>{
+    const handleAddToCart = ()=>{
         if(user && user.email){
             // Todo: send cart item to the database
-            console.log(food, user?.email)
             const cartItem = {
                 menuId: _id,
                 email: user.email,
@@ -32,6 +33,8 @@ const FoodCard = ({ item }) => {
                             icon: "success",
                             timer: 1500
                           });
+                        // refetch cart to update the cart items count
+                        refetch();
                     }
                 })
         }
@@ -62,7 +65,7 @@ const FoodCard = ({ item }) => {
                 <h1 className="text-2xl font-semibold">{name}</h1>
                 <p>{recipe}</p>
                 <div className="flex justify-center my-8">
-                    <button onClick={()=>handleAddToCart(item)} className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 text-yellow-600 border-b-yellow-700  shadow-xl">add to cart</button>
+                    <button onClick={handleAddToCart} className="btn bg-transparent md:text-xl font-semibold border-0 border-b-4 text-yellow-600 border-b-yellow-700  shadow-xl">add to cart</button>
                 </div>
             </div>
         </div>
