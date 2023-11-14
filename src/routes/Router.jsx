@@ -7,6 +7,8 @@ import OurShop from '../pages/our shop/OurShop';
 import Contact from '../pages/Contact';
 import Login from '../pages/Login';
 import CreateAccount from '../pages/CreateAccount';
+import Dashboard from '../layouts/Dashboard';
+import Cart from '../pages/dashboard/Cart';
 
 const Router =createBrowserRouter([
     {
@@ -36,6 +38,16 @@ const Router =createBrowserRouter([
             {
                 path: 'signup',
                 element:<CreateAccount></CreateAccount>
+            }
+        ]
+    },
+    {
+        path:'dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path: 'cart',
+                element:<Cart></Cart>
             }
         ]
     }
