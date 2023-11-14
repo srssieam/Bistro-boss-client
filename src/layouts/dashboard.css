@@ -1,0 +1,17 @@
+#dashboard li a{
+    padding: 0;
+    color:black;
+    text-decoration: none;
+    display: flex;
+    gap:24px;
+    font-weight:500;
+}
+#dashboard li a:hover{
+    color:#ffffff;
+}
+#dashboard li a.active{
+    color:#ffffff;
+}
+#dashboard li a.active a{
+    color:#ffffff;
+}

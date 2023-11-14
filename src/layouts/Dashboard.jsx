@@ -3,13 +3,14 @@ import { BsCart4 } from 'react-icons/bs';
 import { ImHome } from 'react-icons/im';
 import { FaCalendarDays, FaRectangleList } from 'react-icons/fa6';
 import { TbStarsFilled } from 'react-icons/tb';
+import './dashboard.css';
 
 const Dashboard = () => {
     return (
         <div className="flex max-w-screen-xl mx-auto">
             {/* dashboard side bar */}
             <div className="w-64 min-h-screen bg-[#e69040]">
-                <ul className="menu">
+                <ul id="dashboard" className="flex flex-col ml-7 gap-5 my-9">
                     <li><NavLink to="/dashboard/userHome"><ImHome className="text-2xl"></ImHome> User Home</NavLink></li>
                     <li><NavLink to="/dashboard/reservation"><FaCalendarDays className="text-2xl"></FaCalendarDays> Reservation</NavLink></li>
                     <li><NavLink to="/dashboard/cart"><BsCart4 className="text-2xl"></BsCart4> My Cart</NavLink></li>
