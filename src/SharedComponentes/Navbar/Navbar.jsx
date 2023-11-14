@@ -3,20 +3,21 @@ import './NavbarStyle.css'
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import profile from "../../assets/others/profile.png"
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
-    const handleSignOut = ()=>{
+    const handleSignOut = () => {
         logOut()
-            .then(()=>{
+            .then(() => {
                 Swal.fire({
                     title: "Sign out successful!",
                     text: "Thank you for being with us!",
                     icon: "success"
-                  });
+                });
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log(err)
             })
     }
@@ -47,10 +48,21 @@ const Navbar = () => {
                         <h3 className="text-md lg:text-lg font-semibold tracking-wide uppercase">Restaurant</h3>
                     </Link>
                 </div>
-                <div className="hidden lg:flex">
-                    <ul className=" flex gap-6 px-6 text-xl">
-                        {navLink}
-                    </ul>
+                <div>
+                    <div className="hidden lg:flex">
+                        <ul className=" flex gap-6 px-6 text-xl">
+                            {navLink}
+                        </ul>
+                    </div>
+                    {
+                        user && <div>
+                            {
+                                user?.photoURL ? <img src={user.photoURL} alt="" className="w-12 h-12 md:w-14 md:h-14 rounded-full"/>
+                                : <img src={profile} alt="" className="w-12 h-12 md:w-14 md:h-14 rounded-full"/>
+                            }
+                        </div>
+                    }
+                    
                 </div>
             </div>
         </div>
