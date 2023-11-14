@@ -1,10 +1,42 @@
+import Swal from "sweetalert2";
 import SectionTitle from "../../SharedComponentes/SectionTitle";
 import useCart from "../../hooks/useCart";
 import { RiDeleteBin6Line } from 'react-icons/ri';
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Cart = () => {
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
+    const axiosSecure = useAxiosSecure();
+
+    const handleDelete = id =>{
+        console.log(id)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {    
+            axiosSecure.delete(`/carts/${id}`)
+                .then(res =>{
+                    // console.log(res);
+                    refetch()
+                    if(res.data.deletedCount > 0){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Item has been deleted.",
+                            icon: "success"
+                          });
+                    }
+                })
+            }
+          });
+    }
+
     return (
         <div className="px-24">
             <SectionTitle subHeading={"My Cart"} heading={"Wanna add more?"}></SectionTitle>
@@ -45,7 +77,7 @@ const Cart = () => {
                                     </td>
                                     <td>${item.price}</td>
                                     <th>
-                                        <button className="p-2 rounded-md hover:bg-red-500 text-2xl text-white bg-red-700"><RiDeleteBin6Line></RiDeleteBin6Line></button>
+                                        <button onClick={()=>handleDelete(item._id)} className="p-2 rounded-md hover:bg-red-500 text-2xl text-white bg-red-700"><RiDeleteBin6Line></RiDeleteBin6Line></button>
                                     </th>
                                 </tr>)
                             }
