@@ -11,7 +11,11 @@ const ManageUsers = () => {
     const {refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () =>{
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get('/users', {
+                headers: {  // send access-token to server inside header
+                    authorization: `Bearer ${localStorage.getItem('access-token')}`
+                }
+            });
             return res.data;
         }
     })
