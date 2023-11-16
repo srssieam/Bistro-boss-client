@@ -8,7 +8,7 @@ import useAuth from './useAuth';
 const useAxiosSecure = () => { 
     const navigate = useNavigate();
     const { logOut } = useAuth();
-    console.log(logOut)
+    
     // request interceptor to add authorization header for every secure call to the api
     axiosSecure.interceptors.request.use(function(config){
         const token = localStorage.getItem('access-token')

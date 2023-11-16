@@ -6,9 +6,10 @@ import { FaEnvelope } from "react-icons/fa";
 import { TbStarsFilled } from 'react-icons/tb';
 import { AiOutlineMenu, AiOutlineShopping } from 'react-icons/ai';
 import './dashboard.css';
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex max-w-screen-xl mx-auto">
             {/* dashboard side bar */}
@@ -33,7 +34,7 @@ const Dashboard = () => {
                                 <li><NavLink to="/dashboard/reservation"><FaCalendarDays className="text-2xl"></FaCalendarDays> Reservation</NavLink></li>
                                 <li><NavLink to="/dashboard/cart"><BsCart4 className="text-2xl"></BsCart4> My Cart</NavLink></li>
                                 <li><NavLink to="/dashboard/addReview"><TbStarsFilled className="text-2xl"></TbStarsFilled> Add Review</NavLink></li>
-                                <li><NavLink to="/dashboard/addReview"><FaRectangleList className="text-2xl"></FaRectangleList> My Bookings</NavLink></li>
+                                <li><NavLink to="/dashboard/myBooking"><FaRectangleList className="text-2xl"></FaRectangleList> My Bookings</NavLink></li>
                             </>
                     }
 
