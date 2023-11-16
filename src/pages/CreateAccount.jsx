@@ -53,18 +53,25 @@ const CreateAccount = () => {
         .then(res =>{
             const user = res.user;
             console.log(user);
-            Swal.fire({
-                title: "Login successful!",
-                text: "Thank you for being with us!",
-                icon: "success"
-              });
-              navigate(from, {replace:true});
-
+            const userInfo = {
+                email: res.user?.email,
+                name: res.user?.displayName
+            }
+            axiosPublic.post('/users', userInfo)
+                .then(res =>{
+                    console.log(res.data)
+                    Swal.fire({
+                        title: "Login successful!",
+                        text: "Thank you for being with us!",
+                        icon: "success"
+                      });
+                      navigate(from, {replace:true});        
+                })
+           
         })
         .catch(err =>{
             console.log(err)
         })
-
     }   
 
     return (

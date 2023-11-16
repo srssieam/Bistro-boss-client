@@ -7,12 +7,14 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const Login = () => {
     const [error, setError]=useState('')
     const {login, googleLogin} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
 
     let from = location.state?.from?.pathname || "/"
 
@@ -58,20 +60,26 @@ const Login = () => {
         .then(res =>{
             const user = res.user;
             console.log(user);
-            Swal.fire({
-                title: "Login successful!",
-                text: "Thank you for being with us!",
-                icon: "success"
-              });
-              navigate(from, {replace:true});
-
+            const userInfo = {
+                email: res.user?.email,
+                name: res.user?.displayName
+            }
+            axiosPublic.post('/users', userInfo)
+                .then(res =>{
+                    console.log(res.data)
+                    Swal.fire({
+                        title: "Login successful!",
+                        text: "Thank you for being with us!",
+                        icon: "success"
+                      });
+                      navigate(from, {replace:true});        
+                })
+           
         })
         .catch(err =>{
             console.log(err)
-            setError("invalid password")
         })
-
-    }   
+    }  
 
     return (
         <div style={{ backgroundImage: `url(${loginBg})` }} className="bg-no-repeat bg-cover h-max lg:h-[100vh] w-full flex justify-center items-center">
