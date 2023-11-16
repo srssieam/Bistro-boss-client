@@ -4,24 +4,26 @@ import { useContext } from "react";
 import { Vortex } from "react-loader-spinner";
 
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
-    if(loading){
-        return <Vortex
-        visible={true}
-        height="150"
-        width="150"
-        ariaLabel="vortex-loading"
-        wrapperStyle={{}}
-        wrapperClass="vortex-wrapper"
-        colors={['red', 'green', 'blue', 'yellow', 'orange', 'purple']}
-      />
+    if (loading) {
+        return <div className="flex justify-center items-center h-[100vh]">
+            <Vortex
+                visible={true}
+                height="350"
+                width="350"
+                ariaLabel="vortex-loading"
+                wrapperStyle={{}}
+                wrapperClass="vortex-wrapper"
+                colors={['red', 'orange', 'yellow', 'red', 'orange', 'yellow']}
+            />
+        </div>
     }
-    if(user){
+    if (user) {
         return children;
     }
-    return <Navigate to="/login" state={{from: location}} replace></Navigate>
+    return <Navigate to="/login" state={{ from: location }} replace></Navigate>
 };
 
 export default PrivateRoute;

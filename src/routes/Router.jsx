@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../layouts/Dashboard';
 import Cart from '../pages/dashboard/Cart';
+import PrivateRoute from '../routes/PrivateRoute'
 
 const Router =createBrowserRouter([
     {
@@ -43,7 +44,7 @@ const Router =createBrowserRouter([
     },
     {
         path:'dashboard',
-        element:<Dashboard></Dashboard>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children:[
             {
                 path: 'cart',

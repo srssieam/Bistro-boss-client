@@ -7,6 +7,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useForm  } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 const CreateAccount = () => {
@@ -14,23 +15,36 @@ const CreateAccount = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
 
     let from = location.state?.from?.pathname || "/"
 
     const onSubmit = data =>{
         console.log(data);
-        createUser(data.email, data.password, data.photo)
+        createUser(data.email, data.password)
             .then(res =>{
                 const loggedUser = res.user;
                 console.log(loggedUser)
-                Swal.fire({
-                    title: "Account created successful!",
-                    text: "Thank you for being with us!",
-                    icon: "success"
-                  });
+                
                 updateUserProfile(data.name, data.photo)
-                reset();
-                navigate('/')
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email
+                    }
+                axiosPublic.post('/users', userInfo)
+                    .then(res =>{
+                        if(res.data.insertedId){
+                            console.log('user added to the database')
+                            reset();
+                            Swal.fire({
+                                title: "Account created successful!",
+                                text: "Thank you for being with us!",
+                                icon: "success"
+                                });
+                            navigate('/')
+                        }
+                    })        
+                
             })
     }
 
