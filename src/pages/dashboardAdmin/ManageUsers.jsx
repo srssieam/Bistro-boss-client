@@ -44,9 +44,22 @@ const ManageUsers = () => {
           });
     }
 
-    
+    // make admin
     const handleUpdateUser = user =>{
         console.log("user to update",user)
+        axiosSecure.patch(`/users/admin/${user._id}`)
+            .then(res =>{
+                console.log(res.data)
+                if(res.data.modifiedCount > 0){
+                    refetch()
+                    Swal.fire({
+                        title: "Item added!",
+                        text: `${user.name} is Admin Now!`,
+                        icon: "success",
+                        timer: 1500
+                      });
+                }
+            })
     }
 
     return (
@@ -75,7 +88,10 @@ const ManageUsers = () => {
                                     </td>
                                     <td>${user.email}</td>
                                     <th>
-                                        <button onClick={()=>handleUpdateUser(user)} className="p-2 rounded-md hover:bg-red-500 text-2xl text-white bg-[#e69040]"><FaUsers></FaUsers></button>
+                                        {
+                                            user.role === 'admin' ? <span className="font-semibold text-[#e69040]">Admin</span>
+                                            : <button onClick={()=>handleUpdateUser(user)} className="p-2 rounded-md hover:bg-red-500 text-2xl text-white bg-[#e69040]"><FaUsers></FaUsers></button>
+                                        }
                                     </th>
                                     <th>
                                         <button onClick={()=>handleDeleteUser(user)} className="p-2 rounded-md hover:bg-red-500 text-2xl text-white bg-red-700"><RiDeleteBin6Line></RiDeleteBin6Line></button>
