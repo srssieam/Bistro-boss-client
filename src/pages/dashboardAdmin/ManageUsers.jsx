@@ -11,11 +11,7 @@ const ManageUsers = () => {
     const {refetch, data: users = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () =>{
-            const res = await axiosSecure.get('/users', {
-                headers: {  // send access-token to server inside header
-                    authorization: `Bearer ${localStorage.getItem('access-token')}`
-                }
-            });
+            const res = await axiosSecure.get('/users');
             return res.data;
         }
     })
@@ -85,7 +81,7 @@ const ManageUsers = () => {
                         <tbody>
  
                             {
-                                users?.map((user, idx) => <tr key={users._id}>
+                                users?.map((user, idx) => <tr key={user._id}>
                                     <td>{idx + 1}</td>
                                     <td>
                                         {user.name}
