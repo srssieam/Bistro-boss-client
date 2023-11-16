@@ -47,11 +47,10 @@ const Cart = () => {
             </div>
 
             {/* item list */}
-            <div>
                 <div className="overflow-x-auto">
-                    <table className="table">
+                    <table className="table rounded-t-2xl overflow-hidden">
                         {/* head */}
-                        <thead>
+                        <thead className="bg-[#e69040] text-white">
                             <tr className="text-xl font-semibold">
                                 <th></th>
                                 <th>Item Image</th>
@@ -86,7 +85,6 @@ const Cart = () => {
 
                     </table>
                 </div>
-            </div>
         </div>
     );
 };

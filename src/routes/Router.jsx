@@ -10,6 +10,7 @@ import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../layouts/Dashboard';
 import Cart from '../pages/dashboard/Cart';
 import PrivateRoute from '../routes/PrivateRoute'
+import ManageUsers from '../pages/dashboardAdmin/ManageUsers';
 
 const Router =createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const Router =createBrowserRouter([
             {
                 path: 'cart',
                 element:<Cart></Cart>
+            },
+            {
+                path: 'manageUsers',
+                element: <ManageUsers></ManageUsers>
             }
         ]
     }
