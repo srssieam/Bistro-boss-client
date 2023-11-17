@@ -90,7 +90,7 @@ const ManageUsers = () => {
                                     <td>
                                         {user.name}
                                     </td>
-                                    <td>${user.email}</td>
+                                    <td>{user.email}</td>
                                     <th>
                                         {
                                             user.role === 'admin' ? <span className="font-semibold text-[#e69040]">Admin</span>

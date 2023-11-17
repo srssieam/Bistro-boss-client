@@ -13,6 +13,8 @@ import PrivateRoute from '../routes/PrivateRoute'
 import AdminRout from '../routes/AdminRout';
 import ManageUsers from '../pages/dashboardAdmin/ManageUsers';
 import AddItems from '../pages/dashboardAdmin/AddItems';
+import ManageItems from '../pages/dashboardAdmin/ManageItems';
+import UpdateItems from '../pages/dashboardAdmin/UpdateItems';
 
 const Router =createBrowserRouter([
     {
@@ -58,8 +60,17 @@ const Router =createBrowserRouter([
                 element: <AdminRout><ManageUsers></ManageUsers></AdminRout>
             },
             {
+                path: 'manageItems',
+                element: <AdminRout><ManageItems></ManageItems></AdminRout>
+            },
+            {
                 path: 'addItems',
                 element: <AdminRout><AddItems></AddItems></AdminRout>
+            },
+            {
+                path: 'updateItem/:id',
+                element: <AdminRout><UpdateItems></UpdateItems></AdminRout>,
+                loader: ({params})=> fetch(`http://localhost:5000/menu/${params.id}`)
             }
         ]
     }
