@@ -2,12 +2,14 @@ import { FaUtensils } from "react-icons/fa6";
 import SectionTitle from "../../SharedComponentes/SectionTitle";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddItems = () => {
     const { register, handleSubmit} = useForm();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const onSubmit = async data => {
         console.log(data)
@@ -18,6 +20,22 @@ const AddItems = () => {
                 'content-type': 'multipart/form-data'
             }
         });
+        if(res.data.success){
+            // now send the menu item data to the server with the image
+            const menuItem = {
+                name: data.recipeName,
+                category: data.category,
+                price: parseFloat(data.price),
+                recipe: data.recipe,
+                image: res.data.data.display_url
+            }
+            // send new added item info to the server
+            const menuRes = await axiosSecure.post('/menu', menuItem);
+            console.log(menuRes.data)
+            if(menuRes.data.insertedId){
+                // show success popup
+            }
+        }
         console.log(res.data)
     }
     return (
@@ -33,13 +51,13 @@ const AddItems = () => {
                         <div className="grid grid-cols-2 gap-6">
                             <div>
                                 <label htmlFor="category" className="font-semibold text-xl">Category*</label><br />
-                                <select  {...register("Category", {required:true})}  className="px-4 py-3 w-full mt-4">
+                                <select  {...register("category", {required:true})}  className="px-4 py-3 w-full mt-4">
                                     <option disabled selected>category</option>
-                                    <option value="Salad">Salad</option>
-                                    <option value="Pizza">Pizza</option>
-                                    <option value="Dessert">Dessert</option>
-                                    <option value="Soup">Soup</option>
-                                    <option value="Drink">Drink</option>
+                                    <option value="salad">Salad</option>
+                                    <option value="pizza">Pizza</option>
+                                    <option value="dessert">Dessert</option>
+                                    <option value="soup">Soup</option>
+                                    <option value="drink">Drink</option>
                                 </select>
                             </div>
                             <div>
@@ -49,8 +67,8 @@ const AddItems = () => {
                         </div>
                     </div>
                     <div className="mt-6">
-                        <label htmlFor="chef" className="font-semibold text-xl">Recipe Details*</label><br />
-                        <textarea {...register('recipe details')}  cols="30" rows="10" className="px-4 py-3 w-full mt-4" type="text" name="chef" id="" placeholder="Recipe details" />
+                        <label htmlFor="recipe" className="font-semibold text-xl">Recipe Details*</label><br />
+                        <textarea {...register('recipe')}  cols="30" rows="10" className="px-4 py-3 w-full mt-4" type="text" name="chef" id="" placeholder="Recipe details" />
                     </div>
                     <label htmlFor="image" className="font-semibold text-xl">Upload Image*</label><br />
                     <input {...register('image', {required:true})} type="file" className="file-input w-full max-w-xs text-gray-500" />
