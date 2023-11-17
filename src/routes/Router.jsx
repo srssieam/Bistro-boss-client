@@ -10,7 +10,9 @@ import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../layouts/Dashboard';
 import Cart from '../pages/dashboard/Cart';
 import PrivateRoute from '../routes/PrivateRoute'
+import AdminRout from '../routes/AdminRout';
 import ManageUsers from '../pages/dashboardAdmin/ManageUsers';
+import AddItems from '../pages/dashboardAdmin/AddItems';
 
 const Router =createBrowserRouter([
     {
@@ -53,7 +55,11 @@ const Router =createBrowserRouter([
             },
             {
                 path: 'manageUsers',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRout><ManageUsers></ManageUsers></AdminRout>
+            },
+            {
+                path: 'addItems',
+                element: <AdminRout><AddItems></AddItems></AdminRout>
             }
         ]
     }

@@ -7,11 +7,15 @@ import { TbStarsFilled } from 'react-icons/tb';
 import { AiOutlineMenu, AiOutlineShopping } from 'react-icons/ai';
 import './dashboard.css';
 import useAdmin from "../hooks/useAdmin";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     return (
         <div className="flex max-w-screen-xl mx-auto">
+            <Helmet>
+                <title>Bistro Boss | Dashboard</title>
+            </Helmet>
             {/* dashboard side bar */}
             <div className="w-64 min-h-screen bg-[#e69040]">
                 <Link to='/' className="flex flex-col items-center text-[#e2e2e2] font-serif mt-8">

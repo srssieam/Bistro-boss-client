@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -64,6 +65,9 @@ const ManageUsers = () => {
 
     return (
         <div className="px-24">
+            <Helmet>
+                <title>Bistro Boss | Manage user</title>
+            </Helmet>
             <SectionTitle subHeading={"How many"} heading={"Manage all users"}></SectionTitle>
             <h2 className="text-3xl uppercase mb-4">Total Users: {users.length}</h2>
             {/* item list */}

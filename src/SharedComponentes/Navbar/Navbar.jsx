@@ -67,7 +67,7 @@ const Navbar = () => {
                     {
                         user && <div>
                             {
-                                user?.photoURL ? <img src={user.photoURL} alt="" className="w-12 h-12 md:w-14 md:h-14 rounded-full"/>
+                                user?.photoURL ? <img src={user?.photoURL} alt="" className="w-12 h-12 md:w-14 md:h-14 rounded-full"/>
                                 : <img src={profile} alt="" className="w-12 h-12 md:w-14 md:h-14 rounded-full"/>
                             }
                         </div>
