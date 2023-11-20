@@ -1,7 +1,7 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { BsCart4 } from 'react-icons/bs';
 import { ImHome } from 'react-icons/im';
-import { FaCalendarDays, FaRectangleList, FaUtensils, FaBook, FaUsers } from 'react-icons/fa6';
+import { FaCalendarDays, FaRectangleList, FaUtensils, FaBook, FaUsers, FaMoneyCheckDollar } from 'react-icons/fa6';
 import { FaEnvelope } from "react-icons/fa";
 import { TbStarsFilled } from 'react-icons/tb';
 import { AiOutlineMenu, AiOutlineShopping } from 'react-icons/ai';
@@ -36,6 +36,7 @@ const Dashboard = () => {
                             <> {/* common users dashboard nav links */}
                                 <li><NavLink to="/dashboard/userHome"><ImHome className="text-2xl"></ImHome> User Home</NavLink></li>
                                 <li><NavLink to="/dashboard/reservation"><FaCalendarDays className="text-2xl"></FaCalendarDays> Reservation</NavLink></li>
+                                <li><NavLink to="/dashboard/paymentHistory"><FaMoneyCheckDollar className="text-2xl"></FaMoneyCheckDollar> Payment History</NavLink></li>
                                 <li><NavLink to="/dashboard/cart"><BsCart4 className="text-2xl"></BsCart4> My Cart</NavLink></li>
                                 <li><NavLink to="/dashboard/addReview"><TbStarsFilled className="text-2xl"></TbStarsFilled> Add Review</NavLink></li>
                                 <li><NavLink to="/dashboard/myBooking"><FaRectangleList className="text-2xl"></FaRectangleList> My Bookings</NavLink></li>
