@@ -3,6 +3,7 @@ import SectionTitle from "../../SharedComponentes/SectionTitle";
 import useCart from "../../hooks/useCart";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = useCart();
@@ -43,7 +44,10 @@ const Cart = () => {
             <div className="flex justify-between">
                 <h2 className="text-3xl uppercase">Total orders: {cart.length}</h2>
                 <h2 className="text-3xl uppercase">Total Price: ${totalPrice}</h2>
-                <button className="btn text-white bg-[#e69040]">Pay</button>
+                {
+                    cart.length ? <Link to='/dashboard/payment'><button className="btn text-white bg-[#e69040]">Pay</button></Link>
+                    : <button disabled className="btn text-white bg-[#e69040]">Pay</button>
+                }
             </div>
 
             {/* item list */}
