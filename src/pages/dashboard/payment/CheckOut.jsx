@@ -16,11 +16,13 @@ const CheckOut = () => {
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
     useEffect( () => {
-        axiosSecure.post('/create-payment-intent', {price: totalPrice}) // send total price to the server
-        .then(res => {
+        if(totalPrice > 0){ // don't hit backend, if totalPrice is less then 0
+            axiosSecure.post('/create-payment-intent', {price: totalPrice}) // send total price to the server
+            .then(res => {
             console.log(res.data.clientSecret); // receive clientSecret from server
             setClientSecret(res.data.clientSecret)
         })
+        }
     }, [axiosSecure, totalPrice])
 
     const handleSubmit = async (event) => {
@@ -81,7 +83,7 @@ const CheckOut = () => {
                 }
 
                 const res = await axiosSecure.post('/payments', payment)  // sent payment info to the server
-                    console.log('payment saved', res);
+                    console.log('payment saved', res.data);
             }
         }
     }
