@@ -6,11 +6,13 @@ import Swal from "sweetalert2";
 import profile from "../../assets/others/profile.png"
 import { BsCart4 } from 'react-icons/bs';
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [cart] = useCart();
+    const [isAdmin] = useAdmin();
 
     const handleSignOut = () => {
         logOut()
@@ -28,7 +30,12 @@ const Navbar = () => {
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/contact'>Contact us</NavLink></li>
-        <li><NavLink to='/dashboard'>Dashboard</NavLink></li>
+        {
+            user && isAdmin && <li><NavLink to='/dashboard/adminHome'>Dashboard</NavLink></li>
+        }
+        {
+            user && !isAdmin && <li><NavLink to='/dashboard/userHome'>Dashboard</NavLink></li>
+        }
         <li><NavLink to='/menu'>Our menu</NavLink></li>
         <li><NavLink to='/shop/SALADS'>Our shop</NavLink></li>
         <li>
