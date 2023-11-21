@@ -49,11 +49,12 @@ const AuthProvider = ({ children }) => {
                         if(res.data.token){
                             localStorage.setItem('access-token', res.data.token)
                         }
+                        
                     })
             }
             else{
                 // remove token from localStorage (if there is no current user)
-                localStorage.removeItem('access-token');
+                localStorage.removeItem('access-token');  
             }
             setLoading(false);
         });
