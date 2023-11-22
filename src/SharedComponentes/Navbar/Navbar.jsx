@@ -9,6 +9,7 @@ import useCart from "../../hooks/useCart";
 import useAdmin from "../../hooks/useAdmin";
 
 
+
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const [cart] = useCart();
@@ -30,6 +31,7 @@ const Navbar = () => {
     const navLink = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/contact'>Contact us</NavLink></li>
+       
         {
             user && isAdmin && <li><NavLink to='/dashboard/adminHome'>Dashboard</NavLink></li>
         }
