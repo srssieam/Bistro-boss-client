@@ -7,7 +7,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useMenu = () => {
     const axiosPublic = useAxiosPublic();
     // useEffect(() => {
-    //     fetch('http://localhost:5000/menu')
+    //     fetch('https://bistro-boss-server-nu-lyart.vercel.app/menu')
     //         .then(res => res.json())
     //         .then(data => {
     //             setMenu(data);
